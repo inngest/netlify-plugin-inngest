@@ -3,12 +3,9 @@
 // Find more information in the Netlify documentation.
 
 /* eslint-disable no-unused-vars */
-// The plugin main logic uses `on...` event handlers that are triggered on
-// each new Netlify Build.
-// Anything can be done inside those event handlers.
-// Information about the current build are passed as arguments. The build
-// configuration file and some core utilities are also available.
-export const onPreBuild = async function ({
+
+// Runs on build success
+export const onSuccess = async function ({
   // Whole configuration file. For example, content of `netlify.toml`
   netlifyConfig,
   // Users can pass configuration inputs to any plugin in their Netlify
@@ -69,42 +66,29 @@ export const onPreBuild = async function ({
     functions,
   },
 }) {
+
+
+  let url
+
   try {
-    // Commands are printed in Netlify logs
-    await run('echo', ['Hello world!\n'])
-  } catch (error) {
-    // Report a user error
-    build.failBuild('Error message', { error })
+    url = new URL(inputs.path || "/api/inngest", inputs.host || process.env.URL)
+  } catch (err) {
+    return void build.failPlugin(
+      'Invalid or no URL found as Inngest plugin input; please specify a URL to access your functions once deployed',
+    )
   }
 
-  // Console logs are shown in Netlify logs
-  console.log('Netlify configuration', netlifyConfig)
-  console.log('Plugin configuration', inputs)
-  console.log('Build directory', PUBLISH_DIR)
+  status.show({
+    summary: `Submitting Inngest handler: ${url.href}`
+  })
 
-  // Display success information
+  try {
+    await run('curl', ['-X', 'PUT', url, '-v'])
+  } catch (error) {
+    return void build.failPlugin(
+      `Failed to ping deployed Inngest functions. Check that the input URL "${url}" is correct.`,
+    )
+  }
+
   status.show({ summary: 'Success!' })
 }
-
-// Other available event handlers
-/*
-
-// Before build commands are executed
-export const onPreBuild = function () {}
-
-// Build commands are executed
-export const onBuild = function () {}
-
-// After Build commands are executed
-export const onPostBuild = function () {}
-
-// Runs on build success
-export const onSuccess = function () {}
-
-// Runs on build error
-export const onError = function () {}
-
-// Runs on build error or success
-export const onEnd = function () {}
-
-*/
