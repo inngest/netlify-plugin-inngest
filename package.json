@@ -19,7 +19,11 @@
   ],
   "author": "Inngest <1736957+jpwilliams@users.noreply.github.com>",
   "license": "MIT",
-  "repository": "inngest/netlify-plugin-inngest",
+  "repository": "github:inngest/netlify-plugin-inngest",
+  "bugs": {
+    "url": "https://github.com/inngest/netlify-plugin-inngest/issues",
+    "email": "security@inngest.com"
+  },
   "directories": {
     "lib": "src",
     "test": "test"
