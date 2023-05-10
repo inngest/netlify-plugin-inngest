@@ -71,7 +71,8 @@ export const onSuccess = async function ({
   let url
 
   try {
-    url = new URL(inputs.path || "/api/inngest", inputs.host || process.env.URL)
+    // netlify deploys to `/.netlify/functions/inngest` instead of `/api/inngest`.
+    url = new URL(inputs.path || "/.netlfiy/functions/inngest", inputs.host || process.env.URL)
   } catch (err) {
     return void build.failPlugin(
       'Invalid or no URL found as Inngest plugin input; please specify a URL to access your functions once deployed',
