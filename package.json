@@ -57,7 +57,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^4.0.0",
     "execa": "^6.0.0",
-    "netlify-cli": "^15.9.1",
+    "netlify-cli": "^17.22.1",
     "prettier": "^2.1.2",
     "release-it": "^16.1.0"
   }
