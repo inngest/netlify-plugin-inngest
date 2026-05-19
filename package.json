@@ -25,40 +25,29 @@
     "email": "security@inngest.com"
   },
   "directories": {
-    "lib": "src",
-    "test": "test"
+    "lib": "src"
   },
   "engines": {
-    "node": "^12.20.0 || ^14.14.0 || >=16.0.0"
-  },
-  "ava": {
-    "verbose": true,
-    "timeout": "100s",
-    "environmentVariables": {
-      "FORCE_COLOR": "1"
-    }
+    "node": ">=20.0.0"
   },
   "scripts": {
     "build": "netlify-build",
-    "test": "npm run lint && npm run ava",
+    "test": "npm run lint",
     "lint": "npm run eslint && npm run prettier",
-    "eslint": "eslint --ignore-path .gitignore --fix --cache --format=codeframe --max-warnings=0 \"{src,init}/**/*.{cjs,mjs,js}\"",
-    "prettier": "prettier --ignore-path .gitignore --write --loglevel warn \"{.github,src,init}/**/*.{cjs,mjs,js,md,yml,json}\" \"*.{cjs,mjs,js,md,yml,json}\"",
-    "ava": "cross-env FORCE_COLOR=1 ava --verbose",
+    "eslint": "eslint --cache --max-warnings=0 \"{src,init}/**/*.{cjs,mjs,js}\"",
+    "prettier": "prettier --ignore-path .gitignore --write --log-level warn \"{.github,src,init}/**/*.{cjs,mjs,js,md,yml,json}\" \"*.{cjs,mjs,js,md,yml,json}\"",
     "release": "release-it"
   },
   "devDependencies": {
-    "@netlify/build": "^29.17.2",
-    "ava": "^4.0.0",
-    "cross-env": "^7.0.2",
-    "eslint": "^7.10.0",
-    "eslint-config-prettier": "^8.0.0",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "^4.0.0",
-    "execa": "^6.0.0",
-    "netlify-cli": "^17.22.1",
-    "prettier": "^2.1.2",
-    "release-it": "^16.1.0"
+    "@netlify/build": "^35.13.6",
+    "eslint": "^9.39.4",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-n": "^18.0.1",
+    "eslint-plugin-prettier": "^5.5.5",
+    "execa": "^9.6.1",
+    "netlify-cli": "^26.0.2",
+    "prettier": "^3.8.3",
+    "release-it": "^20.0.1"
   }
 }

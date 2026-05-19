@@ -66,13 +66,14 @@ export const onSuccess = async function ({
     functions,
   },
 }) {
-
-
   let url
 
   try {
     // netlify deploys to `/.netlify/functions/inngest` instead of `/api/inngest`.
-    url = new URL(inputs.path || "/.netlify/functions/inngest", inputs.host || process.env.DEPLOY_PRIME_URL)
+    url = new URL(
+      inputs.path || '/.netlify/functions/inngest',
+      inputs.host || process.env.DEPLOY_PRIME_URL,
+    )
   } catch (err) {
     return void build.failPlugin(
       'Invalid or no URL found as Inngest plugin input; please specify a URL to access your functions once deployed',
@@ -80,7 +81,7 @@ export const onSuccess = async function ({
   }
 
   status.show({
-    summary: `Submitting Inngest handler: ${url.href}`
+    summary: `Submitting Inngest handler: ${url.href}`,
   })
 
   try {
